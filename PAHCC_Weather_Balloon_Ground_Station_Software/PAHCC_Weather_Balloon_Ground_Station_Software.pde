@@ -38,7 +38,7 @@ println(val);*/
   drawStat(1600, 430);
   boolean armBut = button("Arm", 20, 1590, 500, 50, 30);
   boolean disarmBut = button("Disarm", 20, 1660, 500, 80, 30);
-  
+  int textInt = textEnt(1,1,1,1);
   if(armBut){
     stat = "Armed";
   }
@@ -46,6 +46,7 @@ println(val);*/
     stat = "Standby";
   }
 }
+
 
 void drawPack(int x, int y){
   noFill();
@@ -63,6 +64,8 @@ void drawPack(int x, int y){
   text("Temperature: "+ temp, x, y+200);
   text("Pressure: "+ press, x, y+240);
 }
+
+
 void getTime(){
   hour = hour();
   min = minute();
@@ -88,6 +91,7 @@ void getTime(){
   
   tStamp = zHour + hour + ":" + zMin + min + ":"+ zSec + sec;
 }
+
 
 void drawTime(int x, int y){
   noFill();
@@ -121,6 +125,7 @@ void drawStat(int x, int y){
   text(stat, x, y + 40);
 }
 
+
 boolean button(String name, int size, int x, int y, int w, int h){
  boolean pressed;
  noFill();
@@ -143,4 +148,30 @@ boolean button(String name, int size, int x, int y, int w, int h){
  }
  text(name, x + 5, y + 22);
  return pressed;
+}
+
+
+int textEnt(int x, int y, int w, int h){
+  String display = "";
+  String cursor = "|";
+  int entry = 12345;
+  int state = 1;
+  if(millis() > 500){
+    cursor = "|";
+  }
+  else{
+    cursor = "";
+  }
+  switch(state){
+    case 0:
+      display = "Enter Release Height Here";
+      break;
+     case 1:
+       display = str(entry) + cursor; 
+  fill(255);
+  textSize(20);
+  text(display, 500, 500);
+  
+  return entry;
+  }
 }
