@@ -36,13 +36,13 @@ println(val);*/
   drawTime(1600,40);
   drawPack(1600,130);
   drawStat(1600, 430);
-  int armBut = button("Arm", 20, 1590, 500, 50, 30);
-  int disarmBut = button("Disarm", 20, 1660, 500, 80, 30);
+  boolean armBut = button("Arm", 20, 1590, 500, 50, 30);
+  boolean disarmBut = button("Disarm", 20, 1660, 500, 80, 30);
   
-  if(armBut == 1){
+  if(armBut){
     stat = "Armed";
   }
-  if(disarmBut == 1){
+  if(disarmBut){
     stat = "Standby";
   }
 }
@@ -121,21 +121,21 @@ void drawStat(int x, int y){
   text(stat, x, y + 40);
 }
 
-int button(String name, int size, int x, int y, int w, int h){
- int pressed;
+boolean button(String name, int size, int x, int y, int w, int h){
+ boolean pressed;
  noFill();
  strokeWeight(3);
  if(mousePressed && mouseButton == LEFT && x < mouseX && mouseX < x + w && y < mouseY && mouseY < y + h){
    stroke(170);
-   pressed = 1;
+   pressed = true;
  }
  else{
    stroke(255);
-   pressed = 0;
+   pressed = false;
  }
  textSize(size);
  rect(x, y, w, h);
- if(mousePressed && mouseButton == LEFT && x < mouseX && mouseX < x + w && y < mouseY && mouseY < y + h){
+ if(pressed){
    fill(170);
  }
  else{
