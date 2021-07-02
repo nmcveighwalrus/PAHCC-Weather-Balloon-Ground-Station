@@ -13,8 +13,9 @@ int sec = second();
 String zHour;
 String zMin;
 String zSec;
-String stat = "Triggered";
+String stat = "Standby";
 String tStamp = "00:00:00";
+int butVal;
 void setup(){
  //String portName = Serial.list()[0];
  //myPort = new Serial(this, portName, 115200);
@@ -35,7 +36,15 @@ println(val);*/
   drawTime(1600,40);
   drawPack(1600,130);
   drawStat(1600, 430);
-  button("Enter", 20, 500, 500, 30, 60);
+  int armBut = button("Arm", 20, 1590, 500, 50, 30);
+  int disarmBut = button("Disarm", 20, 1660, 500, 80, 30);
+  
+  if(armBut == 1){
+    stat = "Armed";
+  }
+  if(disarmBut == 1){
+    stat = "Standby";
+  }
 }
 
 void drawPack(int x, int y){
@@ -112,20 +121,20 @@ void drawStat(int x, int y){
   text(stat, x, y + 40);
 }
 
-boolean button(String name, int size, int x, int y, int w, int h){
- boolean pressed;
+int button(String name, int size, int x, int y, int w, int h){
+ int pressed;
  noFill();
  strokeWeight(3);
  if(mousePressed && mouseButton == LEFT && x < mouseX && mouseX < x + w && y < mouseY && mouseY < y + h){
    stroke(170);
-   pressed = true;
+   pressed = 1;
  }
  else{
    stroke(255);
-   pressed = false;
+   pressed = 0;
  }
  textSize(size);
- rect(x, y, h, w);
+ rect(x, y, w, h);
  if(mousePressed && mouseButton == LEFT && x < mouseX && mouseX < x + w && y < mouseY && mouseY < y + h){
    fill(170);
  }
