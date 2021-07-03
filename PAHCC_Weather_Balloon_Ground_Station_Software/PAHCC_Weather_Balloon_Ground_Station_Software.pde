@@ -153,25 +153,32 @@ boolean button(String name, int size, int x, int y, int w, int h){
 
 int textEnt(int x, int y, int w, int h){
   String display = "";
-  String cursor = "|";
+  String cursor = "";
   int entry = 12345;
   int state = 1;
-  if(millis() > 500){
+  int blinkTime = millis();
+  boolean blinkOn = true;
+  if(blinkOn){
     cursor = "|";
   }
   else{
     cursor = "";
   }
+  if (millis() - 500 > blinkTime) {
+    blinkTime = millis();
+    blinkOn = !blinkOn;
+  }
   switch(state){
     case 0:
       display = "Enter Release Height Here";
       break;
-     case 1:
-       display = str(entry) + cursor; 
+    case 1:
+      display = str(entry) + cursor; 
+  }
   fill(255);
   textSize(20);
   text(display, 500, 500);
-  
+  text(millis(), 500, 550);
   return entry;
-  }
+  
 }
