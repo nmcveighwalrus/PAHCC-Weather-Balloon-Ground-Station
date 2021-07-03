@@ -16,6 +16,7 @@ String zSec;
 String stat = "Standby";
 String tStamp = "00:00:00";
 int butVal;
+
 void setup(){
  //String portName = Serial.list()[0];
  //myPort = new Serial(this, portName, 115200);
@@ -36,15 +37,9 @@ println(val);*/
   drawTime(1600,40);
   drawPack(1600,130);
   drawStat(1600, 430);
-  boolean armBut = button("Arm", 20, 1590, 500, 50, 30);
-  boolean disarmBut = button("Disarm", 20, 1660, 500, 80, 30);
-  int textInt = textEnt(1,1,1,1);
-  if(armBut){
-    stat = "Armed";
-  }
-  if(disarmBut){
-    stat = "Standby";
-  }
+  
+  int textInt = textEnt("Enter Release Height", 1,1,1,1);
+  
 }
 
 
@@ -123,6 +118,14 @@ void drawStat(int x, int y){
   }
   textSize(20);
   text(stat, x, y + 40);
+  boolean armBut = button("Arm", 20, 1590, 500, 50, 30);
+  boolean disarmBut = button("Disarm", 20, 1660, 500, 80, 30);
+  if(armBut){
+    stat = "Armed";
+  }
+  if(disarmBut){
+    stat = "Standby";
+  }
 }
 
 
@@ -151,34 +154,38 @@ boolean button(String name, int size, int x, int y, int w, int h){
 }
 
 
-int textEnt(int x, int y, int w, int h){
+int textEnt(String defMsg, int x, int y, int w, int h){
   String display = "";
   String cursor = "";
   int entry = 12345;
-  int state = 1;
-  int blinkTime = millis();
-  boolean blinkOn = true;
-  if(blinkOn){
+  int state = 0;
+  if(mousePressed && mouseButton == LEFT && x < mouseX && mouseX < x + w && y < mouseY && mouseY < y + h){
+    state = 1;
+  }
+  if(mousePressed && mouseButton == LEFT && x > mouseX || mousePressed && mouseButton == LEFT && mouseX > x + w 
+  || mousePressed && mouseButton == LEFT && y > mouseY || mousePressed && mouseButton == LEFT && mouseY > y + h){
+    state = 0;
+  }
+  if(millis()%1000 >= 500){
     cursor = "|";
   }
   else{
     cursor = "";
   }
-  if (millis() - 500 > blinkTime) {
-    blinkTime = millis();
-    blinkOn = !blinkOn;
-  }
+  
   switch(state){
     case 0:
-      display = "Enter Release Height Here";
+      display = defMsg;
       break;
     case 1:
       display = str(entry) + cursor; 
   }
+  noFill();
+  stroke(255);
+  strokeWeight(5);
+  rect(x-10,y+10,280,40);
   fill(255);
   textSize(20);
-  text(display, 500, 500);
-  text(millis(), 500, 550);
+  text(display, x, y + 40);
   return entry;
-  
 }
