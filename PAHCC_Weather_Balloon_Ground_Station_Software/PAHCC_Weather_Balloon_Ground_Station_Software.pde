@@ -16,7 +16,6 @@ String zSec;
 String stat = "Standby";
 String tStamp = "00:00:00";
 int butVal;
-drawTargAlt targAlt = new drawTargAlt(500,500);
 
 void setup(){
  //String portName = Serial.list()[0];
@@ -38,8 +37,8 @@ println(val);*/
   drawTime(1600,40);
   drawPack(1600,130);
   drawStat(1600, 430);
-  targAlt.update();
   
+  int textInt = textEnt("Enter Release Height", 1,1,1,1);
   
 }
 
@@ -119,8 +118,8 @@ void drawStat(int x, int y){
   }
   textSize(20);
   text(stat, x, y + 40);
-  boolean armBut = button("Arm", 20, x - 10, y + 70, 50, 30);
-  boolean disarmBut = button("Disarm", 20, x + 60, y + 70, 80, 30);
+  boolean armBut = button("Arm", 20, 1590, 500, 50, 30);
+  boolean disarmBut = button("Disarm", 20, 1660, 500, 80, 30);
   if(armBut){
     stat = "Armed";
   }
@@ -155,134 +154,38 @@ boolean button(String name, int size, int x, int y, int w, int h){
 }
 
 
-class drawTargAlt{
-  int x, y;
-  String targAlt = "No target altitude set";
-  boolean enterBut = button("Enter", 20, x - 10, y + 110, 60, 30);
-  boolean clearBut = button("Clear", 20, x + 60, y + 110, 60, 30);
-  boolean resetBut = button("Reset", 20, x + 130, y + 110, 60, 30);
-  drawTargAlt(int xPos, int yPos){
-    x = xPos;
-    y = yPos;
-  }
-  TextEnt trigAlt = new TextEnt("Enter Release Height", x, y + 50);
-  
-  void update(){
-    
-    if(trigAlt.update(0) == 0||trigAlt.update(1) == 0){
-    targAlt = "No trigger altitude set";
-    }
-    if(enterBut){
-     targAlt = str(trigAlt.update(0)); 
-    }
-    if(clearBut){
-      trigAlt.update(0);
-    }
-    if(resetBut){
-      trigAlt.update(0);
-    }
-    textSize(30);
-    fill(255);
-    text("Target Altitude", x, y);
-    textSize(20);
-    text(targAlt, x, y + 40);
-    noFill();
-    strokeWeight(5);
-    rect(x - 10, y + 10, 280, 40);
-    
-    enterBut = button("Enter", 20, x - 10, y + 110, 60, 30);
-    clearBut = button("Clear", 20, x + 60, y + 110, 60, 30);
-    resetBut = button("Reset", 20, x + 130, y + 110, 60, 30);
-  }
-}
-
-
-class TextEnt{
-  String defMsg;
-  int x, y;
-  TextEnt(String msg, int xPos, int yPos){
-    defMsg = msg;
-    x = xPos;
-    y = yPos;
-    
-  }
+int textEnt(String defMsg, int x, int y, int w, int h){
   String display = "";
   String cursor = "";
-  int entry = 0;
+  int entry = 12345;
   int state = 0;
-  String entryStr = "";
-  boolean latch = true;
-  
-  int update(int updState){
-    state = updState;
-    if(mousePressed && mouseButton == LEFT && x < mouseX && mouseX < x + 280 && y < mouseY && mouseY < y + 40){
+  if(mousePressed && mouseButton == LEFT && x < mouseX && mouseX < x + w && y < mouseY && mouseY < y + h){
     state = 1;
-    }
-    if(mousePressed && mouseButton == LEFT && x > mouseX || mousePressed && mouseButton == LEFT && mouseX > x + 280 
-    || mousePressed && mouseButton == LEFT && y > mouseY || mousePressed && mouseButton == LEFT && mouseY > y + 40){
-      state = 0;
-    }
-    if(millis()%1000 >= 500){
-      cursor = "|";
-    }
-    else{
-      cursor = "";
-    }
-    
-    switch(state){
-      case 0:
-        display = defMsg;
-        entryStr = "";
-        break;
-      case 1:
-        if(keyPressed && latch){
-         if(key == '0'){
-           entryStr += "0";
-         }
-         if(key == '1'){
-           entryStr += "1";
-         }
-         if(key == '2'){
-           entryStr += "2";
-         }
-         if(key == '3'){
-           entryStr += "3";
-         }
-         if(key == '4'){
-           entryStr += "4";
-         }
-         if(key == '5'){
-           entryStr += "5";
-         }
-         if(key == '6'){
-           entryStr += "6";
-         }
-         if(key == '7'){
-           entryStr += "7";
-         }
-         if(key == '8'){
-           entryStr += "8";
-         }
-         if(key == '9'){
-           entryStr += "9";
-         }
-        }
-        latch = !keyPressed;
-        entry = int(entryStr);
-        if(entry == 0){
-          display = cursor;
-        }
-        else{
-          display = str(entry) + cursor; 
-        }
+  }
+  if(mousePressed && mouseButton == LEFT && x > mouseX || mousePressed && mouseButton == LEFT && mouseX > x + w 
+  || mousePressed && mouseButton == LEFT && y > mouseY || mousePressed && mouseButton == LEFT && mouseY > y + h){
+    state = 0;
+  }
+  if(millis()%1000 >= 500){
+    cursor = "|";
+  }
+  else{
+    cursor = "";
+  }
+  
+  switch(state){
+    case 0:
+      display = defMsg;
+      break;
+    case 1:
+      display = str(entry) + cursor; 
   }
   noFill();
   stroke(255);
-  strokeWeight(3);
+  strokeWeight(5);
   rect(x-10,y+10,280,40);
   fill(255);
   textSize(20);
   text(display, x, y + 40);
   return entry;
-  }
 }
