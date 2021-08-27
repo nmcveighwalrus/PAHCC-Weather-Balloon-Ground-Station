@@ -16,7 +16,7 @@ String zSec;
 String stat = "Standby";
 String tStamp = "00:00:00";
 int butVal;
-drawTargAlt targAlt = new drawTargAlt(500,500);
+//rawTargAlt targAlt = new drawTargAlt(500,500);
 
 void setup(){
  //String portName = Serial.list()[0];
@@ -38,7 +38,7 @@ println(val);*/
   drawTime(1600,40);
   drawPack(1600,130);
   drawStat(1600, 430);
-  targAlt.update();
+  //targAlt.update();
   
   
 }
@@ -155,7 +155,7 @@ boolean button(String name, int size, int x, int y, int w, int h){
 }
 
 
-class drawTargAlt{
+/*class drawTargAlt{
   int x, y;
   String targAlt = "No target altitude set";
   boolean enterBut = button("Enter", 20, x - 10, y + 110, 60, 30);
@@ -165,12 +165,12 @@ class drawTargAlt{
     x = xPos;
     y = yPos;
   }
-  TextEnt trigAlt = new TextEnt("Enter Release Height", x, y + 50);
+  //TextEnt trigAlt = new TextEnt("Enter Release Height", x, y + 50);
   
   void update(){
     
     if(trigAlt.update(0) == 0||trigAlt.update(1) == 0){
-    targAlt = "No trigger altitude set";
+    targAlt = "No target altitude set";
     }
     if(enterBut){
      targAlt = str(trigAlt.update(0)); 
@@ -194,7 +194,7 @@ class drawTargAlt{
     clearBut = button("Clear", 20, x + 60, y + 110, 60, 30);
     resetBut = button("Reset", 20, x + 130, y + 110, 60, 30);
   }
-}
+}*/
 
 
 class TextEnt{
