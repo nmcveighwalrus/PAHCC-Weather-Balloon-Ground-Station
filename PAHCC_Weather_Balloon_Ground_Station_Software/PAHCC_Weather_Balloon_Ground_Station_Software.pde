@@ -7,17 +7,17 @@ String lon = "07309.81563W";
 String alt = "160M";
 String temp = "22 °C";
 String press = "99.734 kPa";
-int hour = hour();
-int min = minute();
-int sec = second();
+int hour;
+int min;
+int sec;
 String zHour;
 String zMin;
 String zSec;
 String stat = "Standby";
 String tStamp = "00:00:00";
 int butVal;
-//rawTargAlt targAlt = new drawTargAlt(500,500);
-
+drawTargAlt targAlt = new drawTargAlt(500,500);
+TextEnt testTextEnt = new TextEnt("Yerrrr",500,500);
 void setup(){
  //String portName = Serial.list()[0];
  //myPort = new Serial(this, portName, 115200);
@@ -38,7 +38,7 @@ println(val);*/
   drawTime(1600,40);
   drawPack(1600,130);
   drawStat(1600, 430);
-  //targAlt.update();
+  targAlt.update();
   
   
 }
@@ -155,24 +155,24 @@ boolean button(String name, int size, int x, int y, int w, int h){
 }
 
 
-/*class drawTargAlt{
+class drawTargAlt{
   int x, y;
   String targAlt = "No target altitude set";
-  boolean enterBut = button("Enter", 20, x - 10, y + 110, 60, 30);
+  /*boolean enterBut = button("Enter", 20, x - 10, y + 110, 60, 30);
   boolean clearBut = button("Clear", 20, x + 60, y + 110, 60, 30);
-  boolean resetBut = button("Reset", 20, x + 130, y + 110, 60, 30);
+  boolean resetBut = button("Reset", 20, x + 130, y + 110, 60, 30);*/
   drawTargAlt(int xPos, int yPos){
     x = xPos;
     y = yPos;
   }
-  //TextEnt trigAlt = new TextEnt("Enter Release Height", x, y + 50);
+  TextEnt trigAlt = new TextEnt("Enter Release Height", x, y + 50);
   
   void update(){
     
     if(trigAlt.update(0) == 0||trigAlt.update(1) == 0){
     targAlt = "No target altitude set";
     }
-    if(enterBut){
+    /*if(enterBut){
      targAlt = str(trigAlt.update(0)); 
     }
     if(clearBut){
@@ -180,7 +180,7 @@ boolean button(String name, int size, int x, int y, int w, int h){
     }
     if(resetBut){
       trigAlt.update(0);
-    }
+    }*/
     textSize(30);
     fill(255);
     text("Target Altitude", x, y);
@@ -190,16 +190,19 @@ boolean button(String name, int size, int x, int y, int w, int h){
     strokeWeight(5);
     rect(x - 10, y + 10, 280, 40);
     
-    enterBut = button("Enter", 20, x - 10, y + 110, 60, 30);
+    /*enterBut = button("Enter", 20, x - 10, y + 110, 60, 30);
     clearBut = button("Clear", 20, x + 60, y + 110, 60, 30);
-    resetBut = button("Reset", 20, x + 130, y + 110, 60, 30);
+    resetBut = button("Reset", 20, x + 130, y + 110, 60, 30);*/
   }
-}*/
+}
 
 
 class TextEnt{
   String defMsg;
   int x, y;
+  //boolean enterBut = button("Enter", 20, x - 10, y + 110, 60, 30);
+  //boolean clearBut = button("Clear", 20, x + 60, y + 110, 60, 30);
+  //boolean resetBut = button("Reset", 20, x + 130, y + 110, 60, 30);
   TextEnt(String msg, int xPos, int yPos){
     defMsg = msg;
     x = xPos;
