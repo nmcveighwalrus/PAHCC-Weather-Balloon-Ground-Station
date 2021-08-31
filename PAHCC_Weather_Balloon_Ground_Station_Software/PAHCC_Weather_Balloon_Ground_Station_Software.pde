@@ -15,9 +15,8 @@ String zMin;
 String zSec;
 String stat = "Standby";
 String tStamp = "00:00:00";
-int butVal;
-drawTargAlt targAlt = new drawTargAlt(500,500);
-TextEnt testTextEnt = new TextEnt("Yerrrr",500,500);
+//int butVal;
+drawTargAlt targAlt = new drawTargAlt(1600,570);
 void setup(){
  //String portName = Serial.list()[0];
  //myPort = new Serial(this, portName, 115200);
@@ -35,8 +34,8 @@ println(val);*/
   
   background(0);
   getTime();
-  drawTime(1600,40);
-  drawPack(1600,130);
+  drawTime(1600, 40);
+  drawPack(1600, 130);
   drawStat(1600, 430);
   targAlt.update();
   
@@ -158,9 +157,9 @@ boolean button(String name, int size, int x, int y, int w, int h){
 class drawTargAlt{
   int x, y;
   String targAlt = "No target altitude set";
-  /*boolean enterBut = button("Enter", 20, x - 10, y + 110, 60, 30);
-  boolean clearBut = button("Clear", 20, x + 60, y + 110, 60, 30);
-  boolean resetBut = button("Reset", 20, x + 130, y + 110, 60, 30);*/
+  boolean enterBut;
+  boolean clearBut;
+  boolean resetBut;
   drawTargAlt(int xPos, int yPos){
     x = xPos;
     y = yPos;
@@ -168,11 +167,13 @@ class drawTargAlt{
   TextEnt trigAlt = new TextEnt("Enter Release Height", x, y + 50);
   
   void update(){
-    
+    enterBut = button("Enter", 20, x - 10, y + 110, 60, 30);
+    clearBut = button("Clear", 20, x + 60, y + 110, 60, 30);
+    resetBut = button("Reset", 20, x + 130, y + 110, 60, 30);
     if(trigAlt.update(0) == 0||trigAlt.update(1) == 0){
     targAlt = "No target altitude set";
     }
-    /*if(enterBut){
+    if(enterBut){
      targAlt = str(trigAlt.update(0)); 
     }
     if(clearBut){
@@ -180,7 +181,7 @@ class drawTargAlt{
     }
     if(resetBut){
       trigAlt.update(0);
-    }*/
+    }
     textSize(30);
     fill(255);
     text("Target Altitude", x, y);
@@ -189,10 +190,6 @@ class drawTargAlt{
     noFill();
     strokeWeight(5);
     rect(x - 10, y + 10, 280, 40);
-    
-    /*enterBut = button("Enter", 20, x - 10, y + 110, 60, 30);
-    clearBut = button("Clear", 20, x + 60, y + 110, 60, 30);
-    resetBut = button("Reset", 20, x + 130, y + 110, 60, 30);*/
   }
 }
 
