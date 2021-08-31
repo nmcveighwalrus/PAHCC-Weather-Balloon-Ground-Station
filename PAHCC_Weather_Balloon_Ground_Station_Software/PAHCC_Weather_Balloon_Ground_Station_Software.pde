@@ -157,9 +157,9 @@ boolean button(String name, int size, int x, int y, int w, int h){
 class drawTargAlt{
   int x, y;
   String targAlt = "No target altitude set";
-  boolean enterBut;
+  /*boolean enterBut;
   boolean clearBut;
-  boolean resetBut;
+  boolean resetBut;*/
   drawTargAlt(int xPos, int yPos){
     x = xPos;
     y = yPos;
@@ -167,20 +167,11 @@ class drawTargAlt{
   TextEnt trigAlt = new TextEnt("Enter Release Height", x, y + 50);
   
   void update(){
-    enterBut = button("Enter", 20, x - 10, y + 110, 60, 30);
+    /*enterBut = button("Enter", 20, x - 10, y + 110, 60, 30);
     clearBut = button("Clear", 20, x + 60, y + 110, 60, 30);
-    resetBut = button("Reset", 20, x + 130, y + 110, 60, 30);
-    if(trigAlt.update(0) == 0||trigAlt.update(1) == 0){
-    targAlt = "No target altitude set";
-    }
-    if(enterBut){
-     targAlt = str(trigAlt.update(0)); 
-    }
-    if(clearBut){
-      trigAlt.update(0);
-    }
-    if(resetBut){
-      trigAlt.update(0);
+    resetBut = button("Reset", 20, x + 130, y + 110, 60, 30);*/
+    if(trigAlt.update() == 0||trigAlt.update() == 0){
+      targAlt = "No target altitude set";
     }
     textSize(30);
     fill(255);
@@ -197,9 +188,9 @@ class drawTargAlt{
 class TextEnt{
   String defMsg;
   int x, y;
-  //boolean enterBut = button("Enter", 20, x - 10, y + 110, 60, 30);
-  //boolean clearBut = button("Clear", 20, x + 60, y + 110, 60, 30);
-  //boolean resetBut = button("Reset", 20, x + 130, y + 110, 60, 30);
+  boolean enterBut;
+  boolean clearBut;
+  boolean resetBut;
   TextEnt(String msg, int xPos, int yPos){
     defMsg = msg;
     x = xPos;
@@ -213,8 +204,19 @@ class TextEnt{
   String entryStr = "";
   boolean latch = true;
   
-  int update(int updState){
-    state = updState;
+  int update(){
+    enterBut = button("Enter", 20, x - 10, y + 70, 60, 30);
+    clearBut = button("Clear", 20, x + 60, y + 70, 60, 30);
+    resetBut = button("Reset", 20, x + 130, y + 70, 60, 30);
+    if(enterBut){
+      entry = int(entryStr); 
+    }
+    if(clearBut){
+      state = 0;
+    }
+    if(resetBut){
+      state = 0;
+    }
     if(mousePressed && mouseButton == LEFT && x < mouseX && mouseX < x + 280 && y < mouseY && mouseY < y + 40){
     state = 1;
     }
@@ -222,13 +224,6 @@ class TextEnt{
     || mousePressed && mouseButton == LEFT && y > mouseY || mousePressed && mouseButton == LEFT && mouseY > y + 40){
       state = 0;
     }
-    if(millis()%1000 >= 500){
-      cursor = "|";
-    }
-    else{
-      cursor = "";
-    }
-    
     switch(state){
       case 0:
         display = defMsg;
@@ -266,6 +261,14 @@ class TextEnt{
          if(key == '9'){
            entryStr += "9";
          }
+        }
+        
+        //Cursor
+        if(millis()%1000 >= 500){
+        cursor = "|";
+        }
+        else{
+        cursor = "";
         }
         latch = !keyPressed;
         entry = int(entryStr);
