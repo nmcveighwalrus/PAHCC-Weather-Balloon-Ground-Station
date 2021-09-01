@@ -172,8 +172,11 @@ class drawTargAlt{
     /*enterBut = button("Enter", 20, x - 10, y + 110, 60, 30);
     clearBut = button("Clear", 20, x + 60, y + 110, 60, 30);
     resetBut = button("Reset", 20, x + 130, y + 110, 60, 30);*/
-    if(trigAlt.update() == 0||trigAlt.update() == 0){
+    if(trigAlt.update() == 0){
       targAlt = "No target altitude set";
+    }
+    else{
+     targAlt = str(trigAlt.update()); 
     }
     textSize(30);
     fill(255);
@@ -273,7 +276,7 @@ class TextEnt{
         cursor = "";
         }
         latch = !keyPressed;
-        entry = int(entryStr);
+    entry = int(entryStr);
         if(entry == 0){
           display = cursor;
         }
