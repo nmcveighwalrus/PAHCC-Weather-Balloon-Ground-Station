@@ -191,18 +191,17 @@ class TextEnt{
   boolean enterBut;
   boolean clearBut;
   boolean resetBut;
-  TextEnt(String msg, int xPos, int yPos){
-    defMsg = msg;
-    x = xPos;
-    y = yPos;
-    
-  }
   String display = "";
   String cursor = "";
   int entry = 0;
   int state = 0;
   String entryStr = "";
   boolean latch = true;
+  TextEnt(String msg, int xPos, int yPos){
+    defMsg = msg;
+    x = xPos;
+    y = yPos; 
+  }
   
   int update(){
     enterBut = button("Enter", 20, x - 10, y + 70, 60, 30);
@@ -210,6 +209,7 @@ class TextEnt{
     resetBut = button("Reset", 20, x + 130, y + 70, 60, 30);
     if(enterBut){
       entry = int(entryStr); 
+      println(entry);
     }
     if(clearBut){
       state = 0;
