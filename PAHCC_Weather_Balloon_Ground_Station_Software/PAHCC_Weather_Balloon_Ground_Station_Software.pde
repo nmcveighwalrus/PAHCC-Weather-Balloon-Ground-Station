@@ -157,14 +157,16 @@ boolean button(String name, int size, int x, int y, int w, int h){
 class drawTargAlt{
   int x, y;
   String targAlt = "No target altitude set";
+  TextEnt trigAlt;
   /*boolean enterBut;
   boolean clearBut;
   boolean resetBut;*/
   drawTargAlt(int xPos, int yPos){
     x = xPos;
     y = yPos;
+    trigAlt = new TextEnt("Enter release height", x, y + 50);
   }
-  TextEnt trigAlt = new TextEnt("Enter Release Height", x, y + 50);
+  
   
   void update(){
     /*enterBut = button("Enter", 20, x - 10, y + 110, 60, 30);
