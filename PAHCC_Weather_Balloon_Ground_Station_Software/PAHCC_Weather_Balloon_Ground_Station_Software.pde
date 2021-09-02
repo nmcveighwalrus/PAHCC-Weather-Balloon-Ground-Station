@@ -158,9 +158,6 @@ class drawTargAlt{
   int x, y;
   String targAlt = "No target altitude set";
   TextEnt trigAlt;
-  /*boolean enterBut;
-  boolean clearBut;
-  boolean resetBut;*/
   drawTargAlt(int xPos, int yPos){
     x = xPos;
     y = yPos;
@@ -169,9 +166,6 @@ class drawTargAlt{
   
   
   void update(){
-    /*enterBut = button("Enter", 20, x - 10, y + 110, 60, 30);
-    clearBut = button("Clear", 20, x + 60, y + 110, 60, 30);
-    resetBut = button("Reset", 20, x + 130, y + 110, 60, 30);*/
     if(trigAlt.update() == 0){
       targAlt = "No target altitude set";
     }
