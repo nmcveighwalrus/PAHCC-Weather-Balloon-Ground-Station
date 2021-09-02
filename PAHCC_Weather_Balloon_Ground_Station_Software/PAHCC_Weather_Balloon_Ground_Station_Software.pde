@@ -282,14 +282,14 @@ class TextEnt{
         cursor = "";
         }
         latch = !keyPressed;
-    entry = int(entryStr);
+        entry = int(entryStr);
         if(entry == 0){
           display = cursor;
         }
         else{
           display = str(entry) + cursor; 
         }
-  }
+  
   noFill();
   stroke(255);
   strokeWeight(3);
