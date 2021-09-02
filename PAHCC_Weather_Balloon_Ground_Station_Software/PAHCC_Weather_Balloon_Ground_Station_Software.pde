@@ -196,6 +196,7 @@ class TextEnt{
   int state = 0;
   String entryStr = "";
   boolean latch = true;
+  boolean entLatch = false;
   TextEnt(String msg, int xPos, int yPos){
     defMsg = msg;
     x = xPos;
@@ -206,12 +207,20 @@ class TextEnt{
     enterBut = button("Enter", 20, x - 10, y + 70, 60, 30);
     clearBut = button("Clear", 20, x + 60, y + 70, 60, 30);
     resetBut = button("Reset", 20, x + 130, y + 70, 60, 30);
-    if(enterBut){
+    if(enterBut && !entLatch || keyPressed && key == ENTER && !entLatch|| keyPressed && key == RETURN && !entLatch){
       entry = int(entryStr); 
       println(entry);
+      entLatch = true;
     }
+    else if(enterBut || keyPressed && key == ENTER|| keyPressed && key == RETURN){
+     entLatch = true; 
+    }
+    else{
+      entLatch = false;
+    }
+    
     if(clearBut){
-      state = 0;
+      state = 2;
     }
     if(resetBut){
       state = 0;
@@ -260,6 +269,9 @@ class TextEnt{
          if(key == '9'){
            entryStr += "9";
          }
+         break;
+       case 2:
+         display = defMsg;
         }
         
         //Cursor
