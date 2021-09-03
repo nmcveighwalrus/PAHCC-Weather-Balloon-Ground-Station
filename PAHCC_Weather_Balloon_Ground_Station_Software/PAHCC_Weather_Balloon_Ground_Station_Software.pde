@@ -170,7 +170,7 @@ class drawTargAlt{
       targAlt = "No target altitude set";
     }
     else{
-     targAlt = str(trigAlt.update()); 
+     targAlt = str(trigAlt.update())+"M"; 
     }
     textSize(30);
     fill(255);
@@ -211,6 +211,7 @@ class TextEnt{
       entry = int(entryStr); 
       println(entry);
       entLatch = true;
+      state = 2;
     }
     else if(enterBut || keyPressed && key == ENTER|| keyPressed && key == RETURN){
      entLatch = true; 
@@ -220,12 +221,14 @@ class TextEnt{
     }
     
     if(clearBut){
-      state = 2;
+      entryStr = "";
+      state = 1;
     }
     if(resetBut){
       state = 0;
     }
-    if(mousePressed && mouseButton == LEFT && x < mouseX && mouseX < x + 280 && y < mouseY && mouseY < y + 40){
+    if(mousePressed && mouseButton == LEFT && x < mouseX && mouseX < x + 280 && y < mouseY && mouseY < y + 40 
+    || mousePressed && mouseButton == LEFT && x + 60 < mouseX && mouseX < x + 120 && y + 70 < mouseY && mouseY < y + 100){
     state = 1;
     }
     if(mousePressed && mouseButton == LEFT && x > mouseX || mousePressed && mouseButton == LEFT && mouseX > x + 280 
@@ -270,10 +273,15 @@ class TextEnt{
            entryStr += "9";
          }
         }
-        
+        if(entryStr == ""){
+          display = cursor;
+        }
+        else{
+          display = entryStr + cursor; 
+        }
          break;
        case 2:
-         display = defMsg;
+         entryStr = "";
         }
         
         //Cursor
@@ -284,13 +292,8 @@ class TextEnt{
         cursor = "";
         }
         latch = !keyPressed;
-        entry = int(entryStr);
-        if(entry == 0){
-          display = cursor;
-        }
-        else{
-          display = str(entry) + cursor; 
-        }
+        
+        
   
   noFill();
   stroke(255);
@@ -299,6 +302,7 @@ class TextEnt{
   fill(255);
   textSize(20);
   text(display, x, y + 40);
+  println(entry);
   return entry;
   }
 }
