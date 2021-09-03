@@ -269,6 +269,8 @@ class TextEnt{
          if(key == '9'){
            entryStr += "9";
          }
+        }
+        
          break;
        case 2:
          display = defMsg;
