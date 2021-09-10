@@ -226,6 +226,7 @@ class TextEnt{
     }
     if(resetBut){
       state = 0;
+      entry = 0;
     }
     if(mousePressed && mouseButton == LEFT && x < mouseX && mouseX < x + 280 && y < mouseY && mouseY < y + 40 
     || mousePressed && mouseButton == LEFT && x + 60 < mouseX && mouseX < x + 120 && y + 70 < mouseY && mouseY < y + 100){
