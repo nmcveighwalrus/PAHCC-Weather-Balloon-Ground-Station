@@ -209,7 +209,7 @@ class TextEnt{
     resetBut = button("Reset", 20, x + 130, y + 70, 60, 30);
     if(enterBut && !entLatch || keyPressed && key == ENTER && !entLatch|| keyPressed && key == RETURN && !entLatch){
       entry = int(entryStr); 
-      println(entry);
+      //println(entry);
       entLatch = true;
       state = 2;
     }
@@ -303,7 +303,7 @@ class TextEnt{
   fill(255);
   textSize(20);
   text(display, x, y + 40);
-  println(entry);
+  //println(entry);
   return entry;
   }
 }
