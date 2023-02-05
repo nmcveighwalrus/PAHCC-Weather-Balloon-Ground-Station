@@ -15,8 +15,10 @@ String zMin;
 String zSec;
 String stat = "Standby";
 String tStamp = "00:00:00";
+//int scrWidth = displayWidth;
+//int scrHeight = displayHeight;
 //int butVal;
-drawTargAlt targAlt = new drawTargAlt(1600,570);
+drawTargAlt targAlt = new drawTargAlt(displayWidth-320,570);
 void setup(){
  //String portName = Serial.list()[0];
  //myPort = new Serial(this, portName, 115200);
@@ -34,9 +36,9 @@ println(val);*/
   
   background(0);
   getTime();
-  drawTime(1600, 40);
-  drawPack(1600, 130);
-  drawStat(1600, 430);
+  drawTime(displayWidth-320, 40);
+  drawPack(displayWidth-320, 130);
+  drawStat(displayWidth-320, 430);
   targAlt.update();
   
   
