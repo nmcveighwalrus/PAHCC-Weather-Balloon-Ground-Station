@@ -18,7 +18,7 @@ String tStamp = "00:00:00";
 //int scrWidth = displayWidth;
 //int scrHeight = displayHeight;
 //int butVal;
-drawTargAlt targAlt = new drawTargAlt(displayWidth-320,570);
+drawTargAlt targAlt = new drawTargAlt(1600-190,570);
 void setup(){
  //String portName = Serial.list()[0];
  //myPort = new Serial(this, portName, 115200);
